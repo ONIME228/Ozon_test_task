@@ -1,0 +1,8 @@
+.articleBlock{
+    background-color:white; 
+    display:grid;
+    width:387px;
+    height:323px;
+    border-radius:6px;
+    box-shadow: 0px 2px 23px #EDEDED;
+}

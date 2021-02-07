@@ -4,19 +4,20 @@ import { VueComponent } from '../shims-vue';
 import styles from './HelloWorld.css?module'
 
 interface Props {
-  msg: string
+  msg: string,
+  quantity: number,
 }
 
 @Component
 export default class HelloWorld extends VueComponent<Props> {
 
-  @Prop()
-  private msg!: string;
+  @Prop() private msg!: string;
+  @Prop() private quantity!: number;
 
   render() {
     return (
-      <div class={styles.hello}>
-        <h1>{ this.msg }</h1>
+      <div class={styles}>
+        <h1>{this.msg + ' ' + this.quantity}</h1>
         <p>
           ...
         </p>
