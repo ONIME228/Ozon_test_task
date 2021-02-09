@@ -16,7 +16,7 @@ export default class ArticleTile extends VueComponent<Props>{
         const { position } = this;
         const { eventTile } = styles;
         return (
-            < article
+            <article
                 style={position ? `margin-${position}:auto;` : ''}
                 class={eventTile}
             >
@@ -26,6 +26,7 @@ export default class ArticleTile extends VueComponent<Props>{
                     <label htmlFor="checkbox">
                         Выполнить задание
                     </label>
+
                     <input type="checkbox" name="checkbox" id="checkbox" />
                     <label htmlFor="checkbox">
                         Выполнить задание
