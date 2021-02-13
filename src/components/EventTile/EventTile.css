@@ -1,4 +1,4 @@
-*:not(input[type="checkbox"],div){
+.eventTile *:not(input[type="checkbox"],div){
     margin-bottom:1em;
     box-sizing: border-box;
 }

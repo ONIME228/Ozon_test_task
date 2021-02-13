@@ -1,8 +1,62 @@
+.articleBlock *{
+    /* margin-bottom:1em; */
+    box-sizing: border-box;
+}
 .articleBlock{
     background-color:white; 
-    display:grid;
     width:387px;
     height:323px;
     border-radius:6px;
     box-shadow: 0px 2px 23px #EDEDED;
+    padding:2em 2.3em;
+    box-sizing: border-box;
+}
+
+.calendarTitle{
+    color:#6B7897;
+    margin-bottom:1.8em; 
+}
+.daysWeek{
+    display:grid;
+    grid-template-rows: 19px;
+    grid-template-columns: repeat(7,50px);
+    margin-bottom:1.8em;
+}
+.daysWeek>span{
+    text-align: left;
+    color: rgba(52, 72, 94, 0.536062);
+    margin:0;
+    font-weight: 500;
+}
+
+.days{
+    display:grid;
+    /* grid-template-rows: repeat(6,18px); */
+    grid-template-rows: repeat(6,32px);
+    /* grid-template-columns: repeat(7,17px); */
+    grid-template-columns: repeat(7,32px);
+    /* gap: 0.9em 2.2em; */
+    gap:0 1.1em;
+}
+.days>span{
+    color:#7C86A2;
+    cursor: pointer;
+    font-weight: 500;
+    line-height:32px;
+}
+.days>span:hover{
+    background-color:#eef0f4;
+    border-radius: 50%;
+}
+
+.days>span:focus{
+    color:#7C86A2;
+    cursor: pointer;
+}
+.days .chosenDay{
+    background: linear-gradient(0deg, #7ED5FC 0%, #90D9FA 100%);
+    color:#FFFFFF;
+    width:32px;
+    height:32px;
+    border-radius:50%;
 }
