@@ -1,6 +1,6 @@
 import { Component, Vue } from 'vue-property-decorator';
 
-import ArticleTile from './components/ArticleTile/ArticleTile';
+import CalendarTile from './components/CalendarTile/CalendarTile';
 import EventTile from './components/EventTile/EventTile';
 
 
@@ -13,7 +13,7 @@ export default class App extends Vue {
   render() {
     return (
       <div id="app">
-        <ArticleTile position="left" text="Text Block" />
+        <CalendarTile position="left" text="Text Block" />
         <EventTile position="right" />
       </div>
     )

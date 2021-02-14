@@ -1,6 +1,6 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { VueComponent } from '../../shims-vue';
-import styles from './ArticleTile.css?module'
+import styles from './CalendarTile.css?module'
 import UnitCalendar from '../UnitCalendar/UnitCalendar';
 import { useStore } from 'vuex-simple';
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 @Component
-export default class ArticleTile extends VueComponent<Props>{
+export default class CalendarTile extends VueComponent<Props>{
     @Prop() private text!: string;
     @Prop() private position!: string;
     public store: any = useStore(this.$store)
