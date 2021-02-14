@@ -1,5 +1,4 @@
 .articleBlock *{
-    /* margin-bottom:1em; */
     box-sizing: border-box;
 }
 .articleBlock{
@@ -19,11 +18,12 @@
 .daysWeek{
     display:grid;
     grid-template-rows: 19px;
-    grid-template-columns: repeat(7,50px);
+    grid-template-columns: repeat(7,32px);
     margin-bottom:1.8em;
+    gap: 0 1.1em;
 }
 .daysWeek>span{
-    text-align: left;
+    text-align: center;
     color: rgba(52, 72, 94, 0.536062);
     margin:0;
     font-weight: 500;
@@ -31,11 +31,8 @@
 
 .days{
     display:grid;
-    /* grid-template-rows: repeat(6,18px); */
     grid-template-rows: repeat(6,32px);
-    /* grid-template-columns: repeat(7,17px); */
     grid-template-columns: repeat(7,32px);
-    /* gap: 0.9em 2.2em; */
     gap:0 1.1em;
 }
 .days>span{
@@ -47,6 +44,7 @@
 .days>span:hover{
     background-color:#eef0f4;
     border-radius: 50%;
+    transition: .5s;
 }
 
 .days>span:focus{
@@ -59,4 +57,7 @@
     width:32px;
     height:32px;
     border-radius:50%;
+}
+.filled{
+    color: #AA3434!important;
 }

@@ -6,6 +6,7 @@ import { VueComponent } from '../../shims-vue';
 interface Props {
     text: string,
     id: number,
+
 }
 
 @Component

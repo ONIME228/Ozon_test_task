@@ -1,4 +1,4 @@
-.eventTile *:not(input[type="checkbox"],div){
+.eventTile *:not(input[type="checkbox"]){
     margin-bottom:1em;
     box-sizing: border-box;
 }
@@ -14,8 +14,13 @@
     overflow-x: scroll;
 }
 section{
-    display: grid;
-    grid-template-columns: 9% 60%;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+}
+section div{
+    display:flex;
+    align-items:center;
 }
 
 h5{
@@ -23,7 +28,6 @@ h5{
     font-size:15px;
     color:#8C96AB;
     font-weight: 500;
-    /* text-align: start; */
     margin-left: 0;
     margin-top: 0;
 }
@@ -32,6 +36,7 @@ label{
     color:#A2ABBF;
     font-weight: 500;
     text-align:start;
+    margin-bottom:0!important;
 }
 .pseudoCheckbox{
     position: relative;
@@ -57,13 +62,13 @@ input[type="text"]{
     color:grey;
     line-height: 2em;
     padding-left: .9em;
-    /* box-sizing: border-box; */
+    margin-left: 2.75em;
 }
 input[type="checkbox"]{
     appearance: none;
-    /* opacity: 0; */
     width:16px;
     height:16px;
+    margin-right: 1.25em;
 }
 input[type="checkbox"]::before{
     content:'';

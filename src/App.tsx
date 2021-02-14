@@ -1,6 +1,10 @@
 import { Component, Vue } from 'vue-property-decorator';
+
 import ArticleTile from './components/ArticleTile/ArticleTile';
 import EventTile from './components/EventTile/EventTile';
+
+
+
 import './App.css'
 
 

@@ -3,6 +3,9 @@ import { VueComponent } from '../../shims-vue';
 import { getWeekNumber, getListOfDays, getMonthYear } from '../../utils/getWeekDay';
 import styles from './ArticleTile.css?module'
 import UnitCalendar from '../UnitCalendar/UnitCalendar';
+// import store from '../../store/vuex-simple_store';
+import { mapGetters, mapMutations } from 'vuex';
+import { useStore } from 'vuex-simple';
 
 //TSX Interface
 interface Props {
@@ -14,57 +17,63 @@ interface Props {
 export default class ArticleTile extends VueComponent<Props>{
     @Prop() private text!: string;
     @Prop() private position!: string;
-
-    listOfDays = getListOfDays();
-    listOfEmptyDays = getWeekNumber();
-    title = getMonthYear();
-    weekDays: string[] = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс',];
+    public store: any = useStore(this.$store)
+    // listOfDays = getListOfDays();
+    // listOfEmptyDays = getWeekNumber();
+    // title = getMonthYear();
+    // weekDays: string[] = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс',];
     // vuex
-    data: any = {
-        1: [],
-    }
-    elementToHighlight = 0;
-    target: string = '1';
-
+    // data: any = {
+    //     1: [],
+    // } 
+    // elementToHighlight = 0;
+    // targetElement: string = '0';
+    // methods() {
+    //     return { ...mapGetters(['getElementId']) }
+    // }
     handleClick(e: any): void {
         if (e.target.closest('span')) {
-            const elementId = document.getElementById(this.target);
-            if (elementId) {
-                elementId.classList.remove(styles.chosenDay);
-            }
-            this.target = e.target.getAttribute('id')
-            console.log(this.target);
+            const element = document.getElementById(this.store.getElementId);
+            // console.log('store', this.store);
+            if (element) element.classList.remove(styles.chosenDay);
+            this.store.updateWithId(e.target.getAttribute('id'));
             e.target.classList.add(styles.chosenDay);
-            // this.data[`${e.target.textContent}`] = 'kek';
-            // console.log(this.data)
-            // e.target.classList.add(styles.chosenDay)
         }
     }
 
-    // mounted(): void {
-    //     this.listOfDays = getListOfDays();
-    // }
 
     render() {
-        console.log('render',);
-        const { text, position, listOfDays, weekDays, listOfEmptyDays, title } = this;
-        const { articleBlock, daysWeek, calendarTitle, days, chosenDay } = styles;
-        console.log(this.listOfEmptyDays);
+        const { store } = this;
+        // console.log('render Article Tile');
+        //Store getters
+        const idToHighlight = store.getElementId;
+        // const idToHighlight: any = this.methods().getElementId;
+        const listOfDays = store.getListOfDays;
+        const listOfEmptyDays = store.getListOfEmptyDays;
+        const month = store.getMonth;
+        const weekDays = store.getWeekDays;
+        const { text, position, /*listOfDays,*/ /*weekDays,*/ /*listOfEmptyDays,*/ /*title*/ } = this;
+        const { articleBlock, daysWeek, calendarTitle, days, chosenDay, filled } = styles;
+
         return (
             < article
                 style={position ? `margin-${position}:auto;` : ''}
                 class={articleBlock}
             >
-                <h5 class={calendarTitle}> {title} </h5>
+                <h5 class={calendarTitle}> {month} </h5>
                 <div class={daysWeek}>
-                    {weekDays.map(day => <UnitCalendar id={NaN} text={String(day)} />)}
+                    {weekDays.map((day: string) => <UnitCalendar id={NaN} text={String(day)} />)}
                 </div>
                 <div class={days} onClick={this.handleClick} >
-                    {listOfEmptyDays.map(day => <UnitCalendar id={NaN} text={''} />)}
+                    {listOfEmptyDays.map((day: any) => <UnitCalendar id={NaN} text={''} />)}
                     {/* {listOfDays.map(day => <UnitCalendar  text={String(day)} />)} */}
-                    {listOfDays.map(day => {
-                        if (day === listOfDays[this.elementToHighlight]) {
+                    {listOfDays.map((day: any) => {
+                        // console.log(store.getData[day]);
+                        if (day === listOfDays[idToHighlight - 1]) {
                             return <UnitCalendar id={day} class={chosenDay} text={String(day)} />
+                        } else if (store.getData[day] && store.getData[day].length) {
+                            console.log('FLAG', store.getData[day]);
+                            return <UnitCalendar id={day} class={filled} text={String(day)} />
                         }
                         return <UnitCalendar id={day} text={String(day)} />
                     })}

@@ -47,6 +47,9 @@ export const getMonthYear = (): string => {
     return month + ' ' + year;
 }
 
+export const getTodaysDate = () => {
+    return new Date().getDate();
+}
 
 
 
