@@ -1,56 +1,57 @@
-import { Mutation, State, Getter } from 'vuex-simple';
-import { createVuexStore } from 'vuex-simple';
-
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { Mutation, State, Getter } from 'vuex-simple';
+import { createVuexStore } from 'vuex-simple';
+import { getWeekNumber, getListOfDays, getMonthYear, getTodaysDate } from '../utils/utils';
+import { Ipayload, IpayloadExtended, Idata, ElementId, ListOfDays, ListOfEmptyDays, Month, WeekDays } from './store_interfaces';
 
-import { getWeekNumber, getListOfDays, getMonthYear, getTodaysDate } from '../utils/getWeekDay';
 
-// interface State {
-//     elementId: number;
-// }
+
 const listOfDays = getListOfDays();
 const listOfEmptyDays = getWeekNumber();
 const month = getMonthYear();
 const todaysDate = getTodaysDate();
+
 class MyStore {
     @State()
-    public elementId: any = todaysDate;
-    public listOfDays: any = listOfDays;
-    public listOfEmptyDays: any = listOfEmptyDays;
-    public month: string = month;
-    public weekDays: string[] = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс',];
-    public data: any = {
+    public elementId: ElementId = todaysDate;
+    readonly listOfDays: ListOfDays = listOfDays;
+    readonly listOfEmptyDays: ListOfEmptyDays = listOfEmptyDays;
+    readonly month: Month = month;
+    readonly weekDays: WeekDays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс',];
+    public data: Idata = {
         14: [
             {
                 taskName: 'Выполнить тестовое',
                 isCompleted: true,
+                id: 1,
+
             },
         ],
     }
 
     @Getter()
-    public get getElementId(): any {
+    public get getElementId(): ElementId {
         return this.elementId;
     }
     @Getter()
-    public get getListOfDays(): any {
+    public get getListOfDays(): ListOfDays {
         return this.listOfDays;
     }
     @Getter()
-    public get getListOfEmptyDays(): any {
+    public get getListOfEmptyDays(): ListOfEmptyDays {
         return this.listOfEmptyDays;
     }
     @Getter()
-    public get getMonth(): any {
+    public get getMonth(): Month {
         return this.month;
     }
     @Getter()
-    public get getWeekDays(): string[] {
+    public get getWeekDays(): WeekDays {
         return this.weekDays;
     }
     @Getter()
-    public get getData(): any {
+    public get getData(): Idata {
         return this.data;
     }
 
@@ -59,43 +60,32 @@ class MyStore {
         this.elementId = id;
     }
     @Mutation()
-    public updateWithEvent(payload: any) {
+    public updateWithEvent(payload: Ipayload) {
         const { key, value } = payload;
         if (this.data[key]) {
-            // this.data = {
-            //     ...this.data,
-            //     [key]: [...this.data[key], value]
-            // };
-            // this.data[key] = [value, ...this.data[key]]
-            this.data[key] = [
+            Vue.set(this.data, key, [
                 ...this.data[key],
                 {
-                    taskName: value.taskName,
+                    taskName: value,
                     isCompleted: false,
+                    id: Date.now(),
                 },
-            ]
+            ])
         } else {
-            // this.data = {
-            //     ...this.data,
-            //     [key]: [value]
-            // };
-            // this.data[key] = [value]
-            this.data[key] = [{
-                taskName: value.taskName,
+            Vue.set(this.data, key, [{
+                taskName: value,
                 isCompleted: false,
-            },]
+                id: Date.now(),
+            },])
         };
-        this.data = { ...this.data }
-        // console.log('blank', this.data);
+
     }
     @Mutation()
-    public updateWithTaskStatus(payload: any) {
+    public updateWithTaskStatus(payload: IpayloadExtended) {
         const { key, value } = payload;
         if (this.data[key]) {
-
             this.data[key].forEach((element: any) => {
-                if (element.taskName === value.taskName) {
-                    // console.log('element', element);
+                if (element.id === value.id) {
                     element.isCompleted = value.isCompleted;
                 }
             });

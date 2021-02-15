@@ -1,9 +1,9 @@
-.eventTile *:not(input[type="checkbox"]){
+.eventBlock *:not(input[type="checkbox"],label){
     margin-bottom:1em;
     box-sizing: border-box;
 }
 
-.eventTile{
+.eventBlock{
     background-color:white; 
     width:387px;
     height:323px;
@@ -12,18 +12,17 @@
     box-sizing: border-box;
     padding: 1.5em 2em;
     overflow-x: scroll;
+    justify-self: left;
+    /* margin-right:auto; */
 }
-section{
+.events {
     display: flex;
     flex-direction: column;
     align-items:flex-start;
 }
-section div{
-    display:flex;
-    align-items:center;
-}
 
-h5{
+
+.eventsTitle{
     text-align: start;
     font-size:15px;
     color:#8C96AB;
@@ -32,29 +31,7 @@ h5{
     margin-top: 0;
 }
 
-label{
-    color:#A2ABBF;
-    font-weight: 500;
-    text-align:start;
-    margin-bottom:0!important;
-}
-.pseudoCheckbox{
-    position: relative;
-    margin:0;
-    width:16px;
-    height:16px;
-}
-.pseudoCheckbox_style{
-    z-index:-1;
-    margin:0;
-    position: absolute;
-    top:0;
-    width:16px;
-    height:16px;
-    background-color:#F2F3F3;
-
-}
-input[type="text"]{
+.eventsNewEvent{
     grid-column:2;
     width:175px;
     border-radius: 4px;
@@ -63,34 +40,4 @@ input[type="text"]{
     line-height: 2em;
     padding-left: .9em;
     margin-left: 2.75em;
-}
-input[type="checkbox"]{
-    appearance: none;
-    width:16px;
-    height:16px;
-    margin-right: 1.25em;
-}
-input[type="checkbox"]::before{
-    content:'';
-    display:block;
-    width:16px;
-    height:16px;
-    background-color:#F2F3F3;
-}
-input[type="checkbox"]:checked::before{
-    background-image: url('../../assets/checkbox_cheked.svg');
-}   
-input[type="checkbox"]:checked+label{
-    text-decoration: line-through;
-    color:#d8dfee;
-    transition: .5s;
-    appearance: none;
-    -moz-appearance:none;
-    -webkit-appearance:none;
-}
-input::-webkit-input-placeholder {
-    color:#BFC4CC; 
-    }
-input::-moz-placeholder {
-    color:#BFC4CC;
 }

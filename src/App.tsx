@@ -13,8 +13,8 @@ export default class App extends Vue {
   render() {
     return (
       <div id="app">
-        <CalendarTile position="left" text="Text Block" />
-        <EventTile position="right" />
+        <CalendarTile />
+        <EventTile />
       </div>
     )
   }

@@ -6,7 +6,6 @@ import { VueComponent } from '../../shims-vue';
 interface Props {
     text: string,
     id: number,
-
 }
 
 @Component
@@ -15,8 +14,13 @@ export default class UnitCalendar extends VueComponent<Props>{
     @Prop() private id!: number;
     render() {
         const { text, id } = this;
-        return (
-            <span id={isNaN(id) ? '' : id}>{text}</span>
-        )
+        if (isNaN(id) && !text) {
+            return <div></div>
+        } else {
+            return (
+                <span id={id}>{text}</span>
+            )
+        }
+
     }
 }

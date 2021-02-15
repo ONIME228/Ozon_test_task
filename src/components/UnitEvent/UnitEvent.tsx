@@ -1,23 +1,28 @@
 import { Component, Prop } from 'vue-property-decorator';
 import { VueComponent } from '../../shims-vue';
 
+import styles from './UnitEvent.css?module'
 
 //TSX Interface
 interface Props {
-    text: string,
-    isChecked: boolean | undefined
+    text: string | undefined,
+    isChecked: boolean | undefined,
+    id: number
 }
 
 @Component
 export default class UnitCalendar extends VueComponent<Props>{
     @Prop() private text!: string;
-    @Prop() private isChecked!: boolean | undefined;
+    @Prop() private isChecked!: boolean;
+    @Prop() private id!: number;
     render() {
-        const { text, isChecked } = this;
+        const { text, isChecked, id } = this;
+        const { eventBlock, eventLabel, eventCheckbox } = styles;
+        // const uniqueId = Date.now()
         return (
-            <div>
-                <input type="checkbox" name="checkbox" id="checkbox" checked={isChecked} />
-                <label htmlFor="checkbox" >
+            <div class={eventBlock}>
+                <input type="checkbox" class={eventCheckbox} name="checkbox" id={id} checked={isChecked} />
+                <label htmlFor={id} class={eventLabel} >
                     {text}
                 </label>
             </div>

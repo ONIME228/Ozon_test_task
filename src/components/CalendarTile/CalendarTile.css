@@ -1,19 +1,23 @@
-.articleBlock *{
-    box-sizing: border-box;
-}
-.articleBlock{
+.calendarBlock{
     background-color:white; 
     width:387px;
     height:323px;
     border-radius:6px;
-    box-shadow: 0px 2px 23px #EDEDED;
+    box-shadow: 0px 2px 23px #EDEDED; 
     padding:2em 2.3em;
     box-sizing: border-box;
+    /* margin-left:auto; */
+    justify-self:right;
 }
 
 .calendarTitle{
     color:#6B7897;
     margin-bottom:1.8em; 
+    text-align: start;
+    font-size:15px;
+    font-weight: 500;
+    margin-left: 0.3em;
+    margin-top: 0;
 }
 .daysWeek{
     display:grid;
@@ -47,10 +51,6 @@
     transition: .5s;
 }
 
-.days>span:focus{
-    color:#7C86A2;
-    cursor: pointer;
-}
 .days .chosenDay{
     background: linear-gradient(0deg, #7ED5FC 0%, #90D9FA 100%);
     color:#FFFFFF;
@@ -58,6 +58,6 @@
     height:32px;
     border-radius:50%;
 }
-.filled{
+.days .filledDay{
     color: #AA3434!important; 
 }

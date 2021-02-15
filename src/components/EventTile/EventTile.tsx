@@ -1,73 +1,69 @@
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, } from 'vue-property-decorator';
 import { VueComponent } from '../../shims-vue';
-
-import UnitEvent from '../UnitEvent/UnitEvent';
-
 import { useStore } from 'vuex-simple';
+import UnitEvent from '../UnitEvent/UnitEvent';
+import { Istate, IvalueData } from '../../store/store_interfaces';
 
 import styles from './EventTile.css?module'
 
-//TSX Interface
-interface Props {
-    position: string,
+interface IkeyboardEvent extends KeyboardEvent {
+    target: HTMLInputElement
 }
-
+interface ImouseEvent {
+    target: HTMLInputElement
+}
 @Component
-export default class ArticleTile extends VueComponent<Props>{
-    @Prop() private position!: string;
-    public store: any = useStore(this.$store)
+export default class ArticleTile extends VueComponent {
+    public store: Istate = useStore(this.$store)
 
-    handleEnter(e: any) {
-        if (e.code === 'Enter') {
+
+    handleEnter(event: IkeyboardEvent) {
+        if (event.code === 'Enter') {
             this.store.updateWithEvent(
                 {
-                    key: this.store.elementId,
-                    value: {
-                        taskName: e.target.value,
-                    }
+                    key: this.store.getElementId,
+                    value: event.target.value,
                 });
-            e.target.value = '';
+            event.target.value = '';
         }
     }
-    handleClick(e: any) {
-        if (e.target.getAttribute('type') === 'checkbox') {
+
+    handleClick(event: ImouseEvent) {
+        if (event.target.getAttribute('type') === 'checkbox') {
             const elementId = this.store.getElementId;
-            const taskName = e.target.parentElement &&
-                e.target.parentElement.querySelector('label') &&
-                e.target.parentElement.querySelector('label').textContent;
             this.store.updateWithTaskStatus({
                 key: elementId,
                 value: {
-                    taskName: taskName,
-                    isCompleted: e.target.checked
+                    isCompleted: event.target.checked,
+                    id: Number(event.target.getAttribute('id')),
                 }
             });
         }
     }
+
     render() {
         const { store } = this;
-        const { position } = this;
-        const { eventTile } = styles;
-
-        const listOfEvents = store.getData;
+        const { eventBlock, events, eventsTitle, eventsNewEvent } = styles;
+        const elementId = store.getElementId;
+        const data = store.getData;
         return (
             <article
-                style={position ? `margin-${position}:auto;` : ''}
-                class={eventTile}
+                class={eventBlock}
             >
-                <h5> События </h5>
-                <section onClick={this.handleClick}>
+                <h5 class={eventsTitle}> События </h5>
+                <section onClick={this.handleClick} class={events}>
                     {
-                        store.elementId &&
-                        listOfEvents[store.elementId] &&
-                        listOfEvents[store.elementId].map((el: any) => {
+                        data[elementId] &&
+                        data[elementId].map((el: IvalueData) => {
                             return <UnitEvent
-                                isChecked={el && el.isCompleted}
-                                text={el && el.taskName}
+                                isChecked={el.isCompleted}
+                                text={el.taskName}
+                                id={el.id}
                             />
                         })}
                     <input
                         type="text"
+                        class={eventsNewEvent}
                         name="addNote"
                         id="addNote"
                         placeholder="Текст"

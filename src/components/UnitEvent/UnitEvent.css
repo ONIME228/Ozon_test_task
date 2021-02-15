@@ -1,0 +1,34 @@
+.eventBlock{
+    display:flex;
+    align-items:center;
+}
+.eventLabel{
+    color:#A2ABBF;
+    font-weight: 500;
+    text-align:start;
+    margin-bottom:0;
+}
+.eventCheckbox{
+    appearance: none;
+    width:16px; 
+    height:16px;
+    margin-right: 1.25em;
+}
+.eventCheckbox::before{
+    content:'';
+    display:block;
+    width:16px;
+    height:16px;
+    background-color:#F2F3F3;
+}
+.eventCheckbox:checked::before{
+    background-image: url('../../assets/checkbox_cheked.svg');
+}   
+.eventCheckbox:checked+label{
+    text-decoration: line-through;
+    color:#d8dfee;
+    transition: .5s;
+    appearance: none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+}
