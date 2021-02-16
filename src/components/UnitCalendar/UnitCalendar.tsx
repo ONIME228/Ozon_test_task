@@ -5,7 +5,7 @@ import { VueComponent } from '../../shims-vue';
 //TSX Interface
 interface Props {
     text: string,
-    id: number,
+    id: number | string,
 }
 
 @Component
@@ -14,7 +14,7 @@ export default class UnitCalendar extends VueComponent<Props>{
     @Prop() private id!: number;
     render() {
         const { text, id } = this;
-        if (isNaN(id) && !text) {
+        if (!id && !text) {
             return <div></div>
         } else {
             return (

@@ -5,8 +5,8 @@ import styles from './UnitEvent.css?module'
 
 //TSX Interface
 interface Props {
-    text: string | undefined,
-    isChecked: boolean | undefined,
+    text?: string,
+    isChecked?: boolean,
     id: number
 }
 

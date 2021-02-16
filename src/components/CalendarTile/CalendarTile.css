@@ -8,6 +8,7 @@
     box-sizing: border-box;
     /* margin-left:auto; */
     justify-self:right;
+    user-select: none;   
 }
 
 .calendarTitle{

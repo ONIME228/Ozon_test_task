@@ -2,7 +2,8 @@ import { Component, } from 'vue-property-decorator';
 import { VueComponent } from '../../shims-vue';
 import { useStore } from 'vuex-simple';
 import UnitEvent from '../UnitEvent/UnitEvent';
-import { Istate, IvalueData } from '../../store/store_interfaces';
+import { /*IState,*/ IValueData } from '../../store/types';
+import { MyStore } from '../../store/store';
 
 import styles from './EventTile.css?module'
 
@@ -14,14 +15,14 @@ interface ImouseEvent {
 }
 @Component
 export default class ArticleTile extends VueComponent {
-    public store: Istate = useStore(this.$store)
+    public store: MyStore = useStore(this.$store)
 
 
     handleEnter(event: IkeyboardEvent) {
         if (event.code === 'Enter') {
             this.store.updateWithEvent(
                 {
-                    key: this.store.getElementId,
+                    key: this.store.idToHighlight,
                     value: event.target.value,
                 });
             event.target.value = '';
@@ -30,7 +31,7 @@ export default class ArticleTile extends VueComponent {
 
     handleClick(event: ImouseEvent) {
         if (event.target.getAttribute('type') === 'checkbox') {
-            const elementId = this.store.getElementId;
+            const elementId = this.store.idToHighlight;
             this.store.updateWithTaskStatus({
                 key: elementId,
                 value: {
@@ -42,19 +43,20 @@ export default class ArticleTile extends VueComponent {
     }
 
     render() {
-        const { store } = this;
+        const { store: { idToHighlight, data }, handleClick, handleEnter } = this;
         const { eventBlock, events, eventsTitle, eventsNewEvent } = styles;
-        const elementId = store.getElementId;
-        const data = store.getData;
+
+        // const elementId = store.getElementId;
+        // const data = store.getData;
         return (
             <article
                 class={eventBlock}
             >
                 <h5 class={eventsTitle}> События </h5>
-                <section onClick={this.handleClick} class={events}>
+                <section onClick={handleClick} class={events}>
                     {
-                        data[elementId] &&
-                        data[elementId].map((el: IvalueData) => {
+                        data[idToHighlight] &&
+                        data[idToHighlight].map((el: IValueData) => {
                             return <UnitEvent
                                 isChecked={el.isCompleted}
                                 text={el.taskName}
@@ -67,7 +69,7 @@ export default class ArticleTile extends VueComponent {
                         name="addNote"
                         id="addNote"
                         placeholder="Текст"
-                        onKeydown={this.handleEnter}
+                        onKeydown={handleEnter}
                     />
                 </section>
             </article>
