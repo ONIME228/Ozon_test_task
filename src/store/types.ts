@@ -1,10 +1,4 @@
 
-// export type ELEMENT_ID = number;
-// export type LIST_OF_DAYS = number[];
-// export type LIST_OF_EMPTY_DAYS = number[];
-// export type MONTH = string;
-// export type WEEK_DAYS = string[];
-
 interface IEventData {
     taskName: string,
     isCompleted: boolean,
@@ -26,15 +20,3 @@ export interface IPayloadExtended {
     key: number,
     value: IValueData
 }
-// export interface IState {
-//     idToHighlight: number;
-//     data: IData;
-//     // getListOfDays: LIST_OF_DAYS;
-//     // getListOfEmptyDays: LIST_OF_EMPTY_DAYS;
-//     // getMonth: MONTH;
-//     // getWeekDays: WEEK_DAYS;
-//     // getData: IData;
-//     updateWithId: (id: number) => void;
-//     updateWithEvent: (payload: IPayload) => void;
-//     updateWithTaskStatus: (payload: IPayloadExtended) => void;
-// }

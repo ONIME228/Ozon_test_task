@@ -5,7 +5,7 @@ export const getWeekNumber = (): number[] => {
     const weekDay = new Date(
         date.getFullYear(),
         date.getMonth(),
-        //Вы можете добавить здесь дней для проверки отступов
+        //для проверки отступов добавьте дни
     ).getDay();
     //Проверка на Воскресенье
     const days = weekDay === 0 ? 7 : weekDay;

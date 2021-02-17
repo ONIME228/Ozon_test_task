@@ -15,10 +15,11 @@ export default class UnitCalendar extends VueComponent<Props>{
     @Prop() private text!: string;
     @Prop() private isChecked!: boolean;
     @Prop() private id!: number;
+
     render() {
         const { text, isChecked, id } = this;
         const { eventBlock, eventLabel, eventCheckbox } = styles;
-        // const uniqueId = Date.now()
+
         return (
             <div class={eventBlock}>
                 <input type="checkbox" class={eventCheckbox} name="checkbox" id={id} checked={isChecked} />

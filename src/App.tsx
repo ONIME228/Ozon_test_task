@@ -1,7 +1,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
-import CalendarTile from './components/CalendarTile/CalendarTile';
-import EventTile from './components/EventTile/EventTile';
+import CalendarTile from '@/components/CalendarTile/CalendarTile';
+import EventTile from '@/components/EventTile/EventTile';
 
 
 
