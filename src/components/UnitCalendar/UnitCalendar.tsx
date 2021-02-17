@@ -24,11 +24,13 @@ export default class UnitCalendar extends VueComponent<Props>{
         const { text, id, handleClick } = this;
 
 
-        if (!id && !text) {
-            return <div></div>
+        if (!id) {
+            return <div>{text}</div>
         } else {
             return (
-                <span onClick={handleClick} id={id} >{text} </span>
+                <span onClick={handleClick} id={id} >
+                    {text}
+                </span>
             )
         }
 

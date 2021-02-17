@@ -38,7 +38,7 @@ export default class CalendarTile extends VueComponent {
                     {weekDays.map((day: string) => <UnitCalendar key={day} text={String(day)} />)}
                 </div>
                 <div class={days} >
-                    {listOfEmptyDays.length ? listOfEmptyDays.map((el: number) => <UnitCalendar key={String(el)} id={''} text={''} />) : ''}
+                    {listOfEmptyDays.length ? listOfEmptyDays.map((el: string) => <UnitCalendar key={el} id={''} text={''} />) : ''}
                     {listOfDays.map((day: number) => {
                         return <UnitCalendar class={this.getClassName(day)} key={String(day)} id={day} text={String(day)} />
                     })}

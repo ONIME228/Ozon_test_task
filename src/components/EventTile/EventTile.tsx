@@ -20,7 +20,7 @@ export default class ArticleTile extends VueComponent {
 
 
     handleEnter(event: IkeyboardEvent) {
-        if (event.code === 'Enter') {
+        if (event.code === 'Enter' && event.target.value.trim()) {
             this.store.updateWithEvent(
                 {
                     key: this.store.idToHighlight,

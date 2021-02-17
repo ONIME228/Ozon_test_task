@@ -1,7 +1,7 @@
 const date = new Date();
 
-export const getWeekNumber = (): number[] => {
-    let listOfDays: number[] = [];
+export const getWeekNumber = (): string[] => {
+    let listOfDays: string[] = [];
     const weekDay = new Date(
         date.getFullYear(),
         date.getMonth(),
@@ -10,7 +10,7 @@ export const getWeekNumber = (): number[] => {
     //Проверка на Воскресенье
     const days = weekDay === 0 ? 7 : weekDay;
     for (let i = days; i > 1; i--) {
-        listOfDays.push(i);
+        listOfDays.push('empty_' + i);
     }
     return listOfDays;
 };
