@@ -11,9 +11,6 @@ interface IkeyboardEvent extends KeyboardEvent {
     target: HTMLInputElement
 }
 
-interface ImouseEvent {
-    target: HTMLInputElement
-}
 
 const { eventBlock, events, eventsTitle, eventsNewEvent } = styles;
 
@@ -33,26 +30,14 @@ export default class ArticleTile extends VueComponent {
         }
     }
 
-    handleClick(event: ImouseEvent) {
-        if (event.target.getAttribute('type') === 'checkbox') {
-            const elementId = this.store.idToHighlight;
-            this.store.updateWithTaskStatus({
-                key: elementId,
-                value: {
-                    isCompleted: event.target.checked,
-                    id: Number(event.target.getAttribute('id')),
-                }
-            });
-        }
-    }
 
     render() {
-        const { store: { idToHighlight, data }, handleClick, handleEnter } = this;
+        const { store: { idToHighlight, data }, handleEnter } = this;
 
         return (
             <article class={eventBlock}>
                 <h5 class={eventsTitle}> События </h5>
-                <section onClick={handleClick} class={events}>
+                <section class={events}>
                     {
                         data[idToHighlight] &&
                         data[idToHighlight].map((el: IValueData) => {
